@@ -1,4 +1,5 @@
 from validSudoku import *
+from log import *
 
 class Tabuleiro:
 

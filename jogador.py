@@ -2,6 +2,7 @@ from loadsave import *
 import time
 import numpy as np
 import matplotlib as plt
+from log import *
 
 class Jogador():
 
@@ -30,14 +31,6 @@ class Jogador():
     #Talvez esses métodos possam ser passados para uma classe estatisticas
     #dessa classe seria importada dentro do método construtor da classe jogador
     #que por sua vez passaria para a interface, como um perfil de um jogador.
-
-    def historico(self):
-        '''
-            Essa função tem como objetivo armazenar todas as partidas do usuario.
-            Além disso, quantos erros tiveram nessas partidas, se houve desistência, se ganhou e o tempo.
-            Armazena ela em um arquivo grande sendo cada linha do arquivo uma partida.
-        '''
-        pass
 
     def getMetodos(self, metodos = metodos):
         return metodos

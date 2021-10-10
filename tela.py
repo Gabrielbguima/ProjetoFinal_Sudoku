@@ -2,6 +2,7 @@ from interface import *
 #from interface import limpaTela
 from msvcrt import getch
 import os
+from log import *
 
 class Tela(Interface):
     '''

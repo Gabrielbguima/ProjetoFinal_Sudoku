@@ -2,6 +2,7 @@
 # quantidade de erros e acertos, podendo salvar para montar estatísticas e salvar o progresso
 from jogador import *
 from validSudoku import *
+from log import *
 
 class loadSave():
     '''
@@ -12,7 +13,7 @@ class loadSave():
 
         if arquivo == None:
 
-            self.arquivo = open('save.txt', 'w')
+            self.arquivo = open('historico.txt', 'w')
             self.arquivo.close()
         
         else:
@@ -20,11 +21,13 @@ class loadSave():
             self.arquivo = open(arquivo, 'r')
             self.arquivo.close()
     
-    def salvarjogada(self, jogada, arquivo):
+    def salvarJogada(self, jogada, arquivo = 'historico.txt'):
         '''
             Adiciona ao arquivo criado a ultima jogada, recebendo como parâmetro
             a ultima jogada e o arquivo já criado.
             Deve ser utilizado na classe Sudoku para cada jogada realizada seja registrada.
+            A jogada vai vir em forma de tupla, (x, i, j); x sendo o número jogado, i a linha da matriz
+            j a coluna da matriz, o tabuleiro é uma matriz, i e j são coordenadas.
         '''
         try:
 
@@ -39,16 +42,27 @@ class loadSave():
             arquivo = open('save.txt', 'a')
             arquivo.write(jogada)
 
-        except ValueError:
+    def salvarTabuleiro(self, board):
+        '''
+        Essa função tem como objetivo armazenar o tabuleiro do jogo que está sendo jogado e a cada nova jogada
+        reescrevê-lo assim quando a função 'continuar'(continuar deve ser criada na sudoku) for executada 
+        ele usará do arquivo criado nessa função para passar o tabuleiro para o jogador.
 
-            if jogada is not str:
+        Essa função corresponde ao item 5.3 da p2
+        '''
+        try:
+            tabuleiro_atual = open('tabuleiroAtual.txt', 'w')
+            arquivo = open(board, 'r')
 
-                print('Error, valor inválido')
-    
-    '''
-        PROCURAR SABER SE É MELHOR FAZER O MÉTODO QUE ESCREVE UMA NOVA LINHA PARA UM NOVO JOGO É MELHOR
-        NESSA PARTE DO CÓDIGO OU EM OUTRA
-    '''
+            for i in arquivo:
+                tabuleiro_atual.write(i)
+
+            tabuleiro_atual.close()
+            arquivo.close()
+
+        except FileNotFoundError:
+            print('O arquivo não foi encontrado')
+
     def novoJogo(self, arquivo):
         '''
         Para cada novo jogo iniciado ele adiciona uma nova linha no arquivo que representa um novo jogo.
@@ -70,50 +84,9 @@ class loadSave():
 
             print('Essa função só funciona com arquivo já criado, necessita jogar a primeira vez')
 
-    def carregar(self, arquivo):#TESTAR FUNÇÃO CARREGAR
-        '''
-        Essa classe se encarregará de dar o recarregamento da última partida parada do jogador.
-        Ela abre o arquivo save que contém o último tabuleiro criado. Após isso, cria-se uma variavel com 
-        um tabuleiro vazio, a partir disso usa-se a função find_empty da validSudoku para achar os espaços
-        vazios e retornar uma lista. Se não está vazio ele retorna True, porém caso esteja vazio as variáveis
-        linha e coluna recebema variável achar e usamos um loop para cada ir assumindo cada linha do arquivo
-        save.txt nos readlines com a quantidade de linhas e colunas vazias, nisso o board vazio vai sendo preenchido
-        pelos dados do arquivo, fecha-se o arquivo e retorna-se o board dessa vez preechido.
-        '''
-        try:
-            save = open(arquivo, 'r')
-            board = [
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0]
-            ]
+c1 = loadSave()
+board = c1.salvarTabuleiro('carregarteste.txt')
+print(board)
 
-            achar = find_empty(board)
-
-            if not achar:
-
-                return True
-
-            else:
-
-                linha,coluna = achar
-            
-            for i in save.readlines[linha][coluna]:
-
-                board[linha][coluna] = i
-
-            save.close()
-
-            return board
-
-        except  FileNotFoundError:
-
-            print('Infelizmente é impossível carregar o jogo, pois o arquivo não existe')
 
 #FAZER A GETMETODOS E A GETATRIBUTOS

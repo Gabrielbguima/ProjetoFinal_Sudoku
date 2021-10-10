@@ -2,6 +2,7 @@ from validSudoku import *
 import random
 from msvcrt import getch
 from loadsave import *
+from log import *
 
 class Mecanicas:
     
