@@ -1,5 +1,4 @@
 from interface import *
-#from interface import limpaTela
 from msvcrt import getch
 import os
 from log import *
@@ -19,81 +18,24 @@ class Tela(Interface):
         
     def __str__(self): #método de representação em string
         pass
-        
-    def opcao_escolhida(self, opcoes):  #executa a opção que o usuario selecionou
-        pass
     
     def visual(self, nome_do_jogo = 'Sudoku'):   #print a tela principal
         '''
-            Essa classe deve printar a tela principal do jogo, ou seja o menu principal.
-            Esse menu contém o nome do jogo e as opções disponíveis. Por exemplo:
-            - Novo jogo
-            - Continuar
-            - Estatistica
-            - Manual
-            Utilizando-se o método getch() é feita a navegação dentro do menu, possibilitando escolher
-            as opções disponíveis.
-            Criou-se um contador i e para cada valor de i printaría-se uma tela diferente
-            com o comando os.system chamamos o cls para limpar a tela. Então nós usamos o getch()
-            para identificar a tecla pressionada pelo usuário, se forem as setas cima e baixo
-            ela modifica o valor de i de acordo.
+            Essa função tem como objetivo excutar a parte visual para o jogador, usando métodos da classe interface
+            para gerar todos menus, opções inicializações e etc para o usuário.
         '''
-        i = 0
 
-        while True:
-
-            os.system('cls')
-
-            print(f'{nome_do_jogo}: MENU PRINCIPAL')
-
-            if i == 0:
-                print('-->Novo jogo')
-            else:
-                print('Novo Jogo')
-
-            if i == 1:
-                print('-->Continuar')
-            else:
-                print('Continuar')
+        Interface.telaInicial()
             
-            if i == 2:
-                print('-->Estatisticas')
-            else:
-                print('Estatisticas')
-            
-            if i == 3:
-                print('-->Manual')
-            else:
-                print('Manual')
+        '''
+            Quando for pressionado enter deve-se checar a numeração de i
+            colocar os valores em array talvez? dar uma olhada mais tarde
+            Ver a posição do gatilho no código por exemplo i == 0
+            deve iniciar um novo jogo ou seja criar um sudoku dando gatilho em
+            toda a cadeia que desenha o puzzle. Onde a parte de ativação deve ficar?
+            Na classe sudoku e eu chamo a função tela para desenhar o menu de lá?
+        '''
 
-            c = getch()
-
-            if c == b'\x1b': #se c for a tecla ESC será encerrado o loop
-                break
-
-            if c == b'\xe0':
-                c += getch()
-            
-            if c == b'\xe0H':   #tecla seta para baixo do teclado
-                i-=1
-                if i == -1:
-                    i = 3
-
-            elif c == b'\xe0P': #tecla seta para cima do teclado
-                i+=1
-                i%=4
-            
-            #if c == b'\r':
-                #if i == 0:
-            '''
-                Quando for pressionado enter deve-se checar a numeração de i
-                colocar os valores em array talvez? dar uma olhada mais tarde
-                Ver a posição do gatilho no código por exemplo i == 0
-                deve iniciar um novo jogo ou seja criar um sudoku dando gatilho em
-                toda a cadeia que desenha o puzzle. Onde a parte de ativação deve ficar?
-                Na classe sudoku e eu chamo a função tela para desenhar o menu de lá?
-            '''
-    
     def getAtributos(self, atributos = atributos):
         return atributos
     

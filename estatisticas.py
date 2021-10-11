@@ -22,7 +22,7 @@ class Estatisticas():
         -3 = o antipenultimo a quantidade de erros que ele teve quando fechou o tabuleiro
         [0:-3] = e entre todos esses o histórico de jogadas.
     '''
-    def __init__(self, arquivo = 'testeest.txt'):
+    def __init__(self, arquivo = 'historico.txt'):
         '''
             init para tratar a leitura de arquivos e a criação de arrays ou 1 array multidimensional com
             as informações das estatísticas
@@ -68,7 +68,7 @@ class Estatisticas():
     def grafico(self, eixo_x, eixo_y):
 
         eixos_aceitos = {
-        'Número de jogos': self.numero_de_partidas,
+        'Quantidade de jogos': self.numero_de_partidas,
         'Resultados das partidas': self.resultado,
         'Quantidade de erros': self.qnt_erro,
         'tempo médio': self.tempo
@@ -86,8 +86,8 @@ class Estatisticas():
         
         return True
 
-e1 = Estatisticas()
-e1.grafico('Número de jogos', 'Resultados das partidas')
+#e1 = Estatisticas()
+#e1.grafico('Quantidade de jogos', 'Resultados das partidas')
 
 #TUDO FUNCIONANDO, VER MAIS TARDE SE PODE ADICIONAR COISAS COMO SOMENTE VITÓRIAS, DERROTAS E DESISTENCIAS, ETC
     
