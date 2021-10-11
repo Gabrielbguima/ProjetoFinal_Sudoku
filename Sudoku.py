@@ -45,12 +45,26 @@ class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as 
 
     def ganhou(self):   #verifica e apresenta a mensagem que ganhou quando o jogador completa
         '''
-        Compara o tabuleiro do jogador com a solução, se for igual retorna True, caso não retorna falso com
-        uma mensagem dizendo que está incorreta a solução. Usando os métodos da validSudoku.
+        Exibe uma mensagem de parabenização caso o jogador tenha completado o tabuleiro, mostra a qunatidade de 
+        erros e tempo.
+        '''
+        pass
+    def errou(self):
+        '''
+        Essa função tem o intuito de verificar se o jogador errou, comparando o tabuleiro solução com o tabuleiro
+        que ele está preenchendo. toda vez que o jogador errar será contabilizado. Quando o jogador errar 3 vezes
+        será exibida uma mensagem de derrota. Perguntando se ele quer jogar outra ou voltar ao menu principal.
         '''
         pass
 
-    def jogar(self, num, pos): 
+    def jogando(self):
+        '''
+        funcão que deixa o jogo funcionando em loop, reagindo a cada input do jogador seja de setas, numeros,
+        backspace e etc.
+        '''
+        pass
+
+    def jogada(self, num, pos): 
         '''
         recebe um numero do 1 a 9, a função verificará se trata de um numero dentro dos paramentros do jogo
         e realizará a efetivação da jogada na posição selecionada
@@ -81,5 +95,10 @@ class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as 
 
 if __name__ == main:
     pass
+
+'''
+IDEIA: PODE SER CRIADO MODOS DE JOGO DIFERENTES, 'FACIL', 'MEDIO', 'DIFICIL'. A DIFERENCA ENTRE ELES SERÁ QUANTAS
+VEZES O JOGADOR PODE ERRAR; INFINITO/ 10/ 3.
+'''
 
 #tenho que fazer a getMetodos e getAtributos
