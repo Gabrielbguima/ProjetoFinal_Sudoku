@@ -84,9 +84,5 @@ class loadSave():
 
             print('Essa função só funciona com arquivo já criado, necessita jogar a primeira vez')
 
-c1 = loadSave()
-board = c1.salvarTabuleiro('carregarteste.txt')
-print(board)
-
 
 #FAZER A GETMETODOS E A GETATRIBUTOS

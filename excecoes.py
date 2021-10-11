@@ -29,4 +29,20 @@ class InvalidInput():
         log = open('log.txt', 'w')
         log.write(f'InvalidInput\n')
         log.close()
+
+class ImpossivelCarregar():
+
+    try:
+
+        print('Nenhuma partida registrada. Você deve jogar primeiro.')
+        log = open('log.txt', 'a')
+        log.write(f'ImpossivelCarregar\n')
+        log.close()
+
+    except FileNotFoundError:
+
+        print('Nenhuma partida registrada. Você deve jogar primeiro.')
+        log = open('log.txt', 'w')
+        log.write(f'ImpossivelCarregar\n')
+        log.close()
     

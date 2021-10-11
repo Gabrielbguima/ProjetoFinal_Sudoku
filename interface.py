@@ -1,4 +1,5 @@
 import os
+from excecoes import ImpossivelCarregar
 from log import *
 from msvcrt import getch
 from tabuleiro import *
@@ -10,7 +11,9 @@ class Interface():
     representa o que opera atrás da tela do usuario
     '''
     
-    tabelaCaracteres = {chr(x) : x for x in range(256)} 
+    tabelaCaracteres = {chr(x) : x for x in range(256)}
+    atributos = {'nome_do_jogo'}
+    metodos = {'limpartela', 'telaInicial', 'opcaoEscolhida'}
 
     def limparTela():
 
@@ -99,7 +102,17 @@ class Interface():
 
         elif input == 1:
             #Vai abrir o arquivo de carregar, preciso fazer as exceções para o caso de abrir errado e etc.
-            pass
+            try:
+                tabuleiro = open('tabuleiroAtual.txt', 'r')
+                continuar = tabuleiro
+                tabuleiro.close()
+
+                return continuar
+
+            except FileNotFoundError:
+                
+                raise ImpossivelCarregar
+           
 
         elif input == 2:
 
@@ -176,10 +189,33 @@ class Interface():
                         break
 
                     k = 1
-                                 
-        elif input == 3:
-            pass
+        '''elif input == 3:
+            k = Sudoku
+            k.__str__()
 
+        '''                     
+    def getAtributos(self, atributos = atributos):
+        return atributos
+    
+    def getMetodos(self, metodos = metodos):
+        return metodos
+    
+    def getManual(self):
+        """
+            Esta função estática (chamada sempre através de Tela.getManual()) retorna um 
+            dicionário que mapeia os nomes dos atributos e métodos às suas descrições.
+            
+            (None) -> dict
+        """
+        manual = {}
+        manual['telaInicial']           = Interface.telaInicial.__doc__
+        manual['opcaoEscolhida']        = Interface.opcaoEscolhida.__doc__
+        manual['limparTela']            = Interface.limparTela.__doc__
+        manual['getAtributos']          = Interface.getAtributos.__doc__
+        manual['getMetodos']            = Interface.getMetodos.__doc__
+        manual['getManual']             = Interface.getManual.__doc_
+                
+        return manual
 #TERMINAR A QUARTA OPÇÃO DE MANUAL
 # menuprincipal, telapause, telacarregar, telasalvar, opções
 #FAZER A GETMETODOS E A GETATRIBUTOS
