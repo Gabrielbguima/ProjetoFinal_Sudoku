@@ -116,13 +116,25 @@ class Interface():
 
         elif input == 2:
 
-            loadSave('historico.txt')
+            try:
+
+                loadSave('historico.txt')
+
+            except FileNotFoundError:
+
+                print('Não há estatísticas, você ainda não jogou.')
+
             j = 0
             k = 0
+
+            a = Estatisticas('historico.txt')
+            por = a.porcentagens
 
             while True:
 
                 Interface.limparTela()
+                #debugar a função
+                #print(f'Porcentagem de vitórias:{por[0]}\n Porcentagem de desistências:{por[1]}\n Porcentagem de derrotas{por[2]}')
 
                 if k == 1:
                     print('Escolha sua segunda opção:')
@@ -147,9 +159,9 @@ class Interface():
                     print('Quantidade de erros')
 
                 if j == 3:
-                    print('-->tempo médio')
+                    print('-->Tempo')
                 else:
-                    print('tempo médio')
+                    print('Tempo')
                 
                 c = getch()
 
@@ -173,7 +185,7 @@ class Interface():
                         0 :'Quantidade de jogos',
                         1 :'Resultados das partidas',
                         2 :'Quantidade de erros',
-                        3 :'tempo médio',
+                        3 :'Tempo',
                     }
 
                     if k == 0:
@@ -189,6 +201,7 @@ class Interface():
                         break
 
                     k = 1
+
         '''elif input == 3:
             k = Sudoku
             k.__str__()

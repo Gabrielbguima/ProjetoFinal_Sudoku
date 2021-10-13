@@ -12,6 +12,10 @@ class Tabuleiro:
 
         
     def preparar(self, tabuleiro):  #irá apagar os numeros de forma que seja possivel resolver o tabuleiro
+        '''
+        A função foi criada para preparar um tabuleiro de sudoku colocando 0 em partes aleatórias do tabuleiro
+        com uma certa quantidade para que seja possível a resolução do puzzle.
+        '''
         pass
 
     def terminou(self, tabuleiro):

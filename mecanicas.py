@@ -7,7 +7,7 @@ from log import *
 
 class Mecanicas:
 
-    comandos_permitidos = {'1','2','3','4','5','6','7','8','9',''}
+    comandos_permitidos = {'1','2','3','4','5','6','7','8','9'}
 
     def teclas(self, comando, comandos = comandos_permitidos):   #usando o getch será definida as funções das teclas nessa função
         try:

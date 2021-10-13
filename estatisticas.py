@@ -71,7 +71,7 @@ class Estatisticas():
         'Quantidade de jogos': self.numero_de_partidas,
         'Resultados das partidas': self.resultado,
         'Quantidade de erros': self.qnt_erro,
-        'tempo médio': self.tempo
+        'Tempo': self.tempo
         }
 
         if (eixo_x and eixo_y) in eixos_aceitos:
@@ -85,9 +85,58 @@ class Estatisticas():
             plt.show()
         
         return True
+    
+    def media(self, opcao): #testar essa função 
+        '''
+            Esta função a partir de uma opção em str ele retorna a média de uma dada estatística do jogador.
+            Checa os eixos de entrada para selecionar o array corretamente. Em seguida faz a soma interna do array
+            e divide pelo tamanho do mesmo.
+        '''
+
+        eixos_aceitos = {
+        'Quantidade de erros': self.qnt_erro,
+        'tempo médio': self.tempo
+        }
+
+        if opcao in eixos_aceitos:
+
+            soma = np.sum(eixos_aceitos[opcao])
+
+            return soma/np.size(eixos_aceitos[opcao])
+
+    def porcentagens(self): # A função apresenta um bug, tem que dar fix
+        '''
+        Entrega as estatisticas de porcentagens de vitórias, derrotas e desistencias. Coloca os três resultados
+        1, 0, -1 em uma lista e roda um for para cada i ele conta a qunatidade de ocorrencia de um item i
+        e faz os calculos de porcentagem.
+        '''
+
+        for i in range(-1, 2):
+
+            if i == 1:
+                qnt = np.count_nonzero(self.resultado == i)
+                print(qnt)
+                porcentagem_de_wins = (qnt/np.size(self.resultado))*100
+
+            elif i == 0:
+                qnt = np.count_nonzero(self.resultado == i)
+                porcentagem_de_desistencias = (qnt/np.size(self.resultado))*100
+
+            elif i == -1:
+                qnt = np.count_nonzero(self.resultado == i)
+                porcentagem_de_derrotas = (qnt/np.size(self.resultado))*100
+
+        return porcentagem_de_wins, porcentagem_de_desistencias, porcentagem_de_derrotas
+
+#a = Estatisticas('historico.txt')
+#print(a.media('tempo médio'))
+
+
+            
 
 #e1 = Estatisticas()
 #e1.grafico('Quantidade de jogos', 'Resultados das partidas')
 
 #TUDO FUNCIONANDO, VER MAIS TARDE SE PODE ADICIONAR COISAS COMO SOMENTE VITÓRIAS, DERROTAS E DESISTENCIAS, ETC
+#Ver se é possível adicionar uma linha de média sobre a estatística do eixo x
     
