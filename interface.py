@@ -50,24 +50,25 @@ class Interface():
             Interface.limparTela()
 
             print(f'{nome_do_jogo}: MENU PRINCIPAL')
+            print('\t')
 
             if i == 0:
-                print('-->Novo jogo')
+                print('>>>Novo jogo')
             else:
                 print('Novo Jogo')
 
             if i == 1:
-                print('-->Continuar')
+                print('>>>Continuar')
             else:
                 print('Continuar')
             
             if i == 2:
-                print('-->Estatisticas')
+                print('>>>Estatisticas')
             else:
                 print('Estatisticas')
             
             if i == 3:
-                print('-->Manual')
+                print('>>>Manual')
             else:
                 print('Manual')
 
@@ -120,93 +121,100 @@ class Interface():
 
                 loadSave('historico.txt')
 
-            except FileNotFoundError:
+                j = 0
+                k = 0
 
-                print('Não há estatísticas, você ainda não jogou.')
+                a = Estatisticas('historico.txt')
+                por = a.porcentagens()
 
-            j = 0
-            k = 0
+                while True:
 
-            a = Estatisticas('historico.txt')
-            por = a.porcentagens
+                    Interface.limparTela()
+                    #debugar a função
+                    print(f'Porcentagem de vitórias:\t{por[0]:0.5f}\nPorcentagem de desistências:\t{por[1]}\nPorcentagem de derrotas:\t{por[2]}')
+                    print('\t')
 
-            while True:
+                    if k == 1:
+                        print('Escolha sua segunda opção:')
+                        print('\t')
 
-                Interface.limparTela()
-                #debugar a função
-                #print(f'Porcentagem de vitórias:{por[0]}\n Porcentagem de desistências:{por[1]}\n Porcentagem de derrotas{por[2]}')
-
-                if k == 1:
-                    print('Escolha sua segunda opção:')
-
-                else:
-                    print('Quais opções você deseja? Selecione duas')
-                
-
-                if j == 0:
-                    print('-->Quantidade de jogos')
-                else:
-                    print('Quantidade de jogos')
-                
-                if j == 1:
-                    print('-->Resultados das partidas')
-                else:
-                    print('Resultados das partidas')
-                
-                if j == 2:
-                    print('-->Quantidade de erros')
-                else:
-                    print('Quantidade de erros')
-
-                if j == 3:
-                    print('-->Tempo')
-                else:
-                    print('Tempo')
-                
-                c = getch()
-
-                if c == b'\x1b': #se c for a tecla ESC será encerrado o loop
-                    break
-
-                if c == b'\xe0':
-                    c += getch()
-
-                if c == b'\xe0H':   #tecla seta para baixo do teclado
-                    j-=1
-                    if j == -1:
-                        j = 3
-
-                elif c == b'\xe0P': #tecla seta para cima do teclado
-                    j+=1
-                    j%=4
-                
-                if c == b'\r':  #Se c for a tecla enter
-                    opcoes = {
-                        0 :'Quantidade de jogos',
-                        1 :'Resultados das partidas',
-                        2 :'Quantidade de erros',
-                        3 :'Tempo',
-                    }
-
-                    if k == 0:
-
-                        opcao1 = opcoes[j]
-
-                    elif k > 0:
-
-                        opcao2 = opcoes[j]
+                    else:
+                        print('Quais opções você deseja? Selecione duas')
                     
-                        a = Estatisticas('historico.txt')
-                        a.grafico(opcao1, opcao2)
+
+                    if j == 0:
+                        print('>>>Quantidade de jogos')
+                    else:
+                        print('Quantidade de jogos')
+                    
+                    if j == 1:
+                        print('>>>Resultados das partidas')
+                    else:
+                        print('Resultados das partidas')
+                    
+                    if j == 2:
+                        print('>>>Quantidade de erros')
+                    else:
+                        print('Quantidade de erros')
+
+                    if j == 3:
+                        print('>>>Tempo')
+                    else:
+                        print('Tempo')
+                    
+                    c = getch()
+
+                    if c == b'\x1b': #se c for a tecla ESC será encerrado o loop
                         break
 
-                    k = 1
+                    if c == b'\xe0':
+                        c += getch()
 
-        '''elif input == 3:
-            k = Sudoku
-            k.__str__()
+                    if c == b'\xe0H':   #tecla seta para baixo do teclado
+                        j-=1
+                        if j == -1:
+                            j = 3
 
-        '''                     
+                    elif c == b'\xe0P': #tecla seta para cima do teclado
+                        j+=1
+                        j%=4
+                    
+                    if c == b'\r':  #Se c for a tecla enter
+                        opcoes = {
+                            0 :'Quantidade de jogos',
+                            1 :'Resultados das partidas',
+                            2 :'Quantidade de erros',
+                            3 :'Tempo',
+                        }
+
+                        if k == 0:
+
+                            opcao1 = opcoes[j]
+
+                        elif k > 0:
+
+                            opcao2 = opcoes[j]
+
+                            try:
+                                a = Estatisticas('historico.txt')
+                                a.grafico(opcao1, opcao2)
+                                break
+
+                            except FileNotFoundError:
+                                loadSave()
+
+                        k = 1
+
+                    '''elif input == 3:
+                        k = Sudoku
+                        k.__str__()
+
+                    '''                     
+
+            except FileNotFoundError:
+
+                print('Não há estatísticas, você ainda não jogou.') #está aparecendo mt rápido tentar time para ficar mais tempo
+                  
     def getAtributos(self, atributos = atributos):
         return atributos
     

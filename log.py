@@ -13,7 +13,7 @@ class log():
 
             self.arqlog = open(arqlog, 'r')
             self.arqlog.close()
-
+    
 #Erros que podem ter dentro do Sudoku
 #Entrada de teclas erradas dentro do jogo; uma entrada que não seja de 1 a 9
 #Tentar remover um número que seja do tabuleiro base do jogo

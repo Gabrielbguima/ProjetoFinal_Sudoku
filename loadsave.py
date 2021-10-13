@@ -13,7 +13,9 @@ class loadSave():
 
         if arquivo == None:
 
+            Jogador()
             self.arquivo = open('historico.txt', 'w')
+            self.arquivo.write(self.nome)
             self.arquivo.close()
         
         else:

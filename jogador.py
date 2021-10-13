@@ -6,10 +6,10 @@ from log import *
 
 class Jogador():
 
-    atributos = {'nome', 'erros', 'tempo'}
+    atributos = {'nome'}
     metodos = {'historico', 'estatisticas','getMetodos', 'getAtributos'}
 
-    def __init__(self, nome = '', erros = 0, tempo = 0):   #receberá dados do jogador, como quantidade de erros cometidos e o tempo dele de resolução    
+    def __init__(self, nome = ''):   #receberá dados do jogador, como quantidade de erros cometidos e o tempo dele de resolução    
         '''
         todo jogo feito por esse jogador estará em um txt, que é feito no loadsave
         esse txt em cada linha terá 1 partida, sendo;
@@ -26,7 +26,6 @@ class Jogador():
 
             self.nome = nome
 
-        self.arquivo = open('save.txt', 'r') 
 
     #Talvez esses métodos possam ser passados para uma classe estatisticas
     #dessa classe seria importada dentro do método construtor da classe jogador

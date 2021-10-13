@@ -22,11 +22,12 @@ class Estatisticas():
         -3 = o antipenultimo a quantidade de erros que ele teve quando fechou o tabuleiro
         [0:-3] = e entre todos esses o histórico de jogadas.
     '''
-    def __init__(self, arquivo = 'historico.txt'):
+    def __init__(self, arquivo):
         '''
             init para tratar a leitura de arquivos e a criação de arrays ou 1 array multidimensional com
             as informações das estatísticas
         '''
+
         arq = open(arquivo, 'r')
         numero_de_partidas_lista = []
         leitura = arq.readlines()
@@ -128,8 +129,6 @@ class Estatisticas():
 
         return porcentagem_de_wins, porcentagem_de_desistencias, porcentagem_de_derrotas
 
-#a = Estatisticas('historico.txt')
-#print(a.media('tempo médio'))
 
 
             

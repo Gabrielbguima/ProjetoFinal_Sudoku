@@ -25,7 +25,7 @@ class Tela(Interface):
             para gerar todos menus, opções inicializações e etc para o usuário.
         '''
 
-        Interface.telaInicial()
+        Tela.telaInicial()
             
         '''
             Quando for pressionado enter deve-se checar a numeração de i
