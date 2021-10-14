@@ -13,7 +13,6 @@ class loadSave():
 
         if arquivo == None:
 
-            Jogador()
             self.arquivo = open('historico.txt', 'w')
             self.arquivo.write(self.nome)
             self.arquivo.close()
@@ -30,6 +29,8 @@ class loadSave():
             Deve ser utilizado na classe Sudoku para cada jogada realizada seja registrada.
             A jogada vai vir em forma de tupla, (x, i, j); x sendo o número jogado, i a linha da matriz
             j a coluna da matriz, o tabuleiro é uma matriz, i e j são coordenadas.
+
+            tuple -> None
         '''
         try:
 
@@ -43,6 +44,7 @@ class loadSave():
             arquivo.close()
             arquivo = open('save.txt', 'a')
             arquivo.write(jogada)
+            log.addLog('FileNotFoundError')
 
     def salvarTabuleiro(self, board):
         '''
@@ -51,6 +53,7 @@ class loadSave():
         ele usará do arquivo criado nessa função para passar o tabuleiro para o jogador.
 
         Essa função corresponde ao item 5.3 da p2
+        str -> None
         '''
         try:
             tabuleiro_atual = open('tabuleiroAtual.txt', 'w')
@@ -64,6 +67,7 @@ class loadSave():
 
         except FileNotFoundError:
             print('O arquivo não foi encontrado')
+            log.addLog('FileNotFoundError')
 
     def novoJogo(self, arquivo):
         '''
@@ -85,6 +89,7 @@ class loadSave():
         except  FileNotFoundError:
 
             print('Essa função só funciona com arquivo já criado, necessita jogar a primeira vez')
+            log.addLog('FileNotFoundError')
 
 
 #FAZER A GETMETODOS E A GETATRIBUTOS

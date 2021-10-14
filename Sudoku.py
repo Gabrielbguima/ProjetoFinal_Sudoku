@@ -27,13 +27,17 @@ from mecanicas import *
 from loadsave import *
 from log import *
 
-class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as mecanicas do jogo
+class Sudoku(Mecanicas):
+    '''
+    Classe principal que possui atributos como a quantidade de jogadores que jogam e qunado o jogador está jogando.
+    '''
 
-    def __init__(self, jogador = 1):    #recebe o parametro de jogadores, sempre 1.
+    def __init__(self, jogador = 1): 
+        
+        nome = Jogador()
+        self.jogador = nome
 
-        self.jogador = jogador.nome
-
-    def solucao(self, tabuleiro):  #mostra a solução caso necessário
+    def solucao(self, tabuleiro):
         '''
             Se a opção for desistir será exibido a solução do problema,
             talvez seja necessário mover essa opção posteriormente
@@ -43,20 +47,6 @@ class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as 
 
         return True
 
-    def ganhou(self):   #verifica e apresenta a mensagem que ganhou quando o jogador completa
-        '''
-        Exibe uma mensagem de parabenização caso o jogador tenha completado o tabuleiro, mostra a qunatidade de 
-        erros e tempo.
-        '''
-        pass
-    def errou(self):
-        '''
-        Essa função tem o intuito de verificar se o jogador errou, comparando o tabuleiro solução com o tabuleiro
-        que ele está preenchendo. toda vez que o jogador errar será contabilizado. Quando o jogador errar 3 vezes
-        será exibida uma mensagem de derrota. Perguntando se ele quer jogar outra ou voltar ao menu principal.
-        '''
-        pass
-
     def jogando(self):
         '''
         funcão que deixa o jogo funcionando em loop, reagindo a cada input do jogador seja de setas, numeros,
@@ -64,22 +54,12 @@ class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as 
         '''
         pass
 
-    def jogada(self, num, pos): 
-        '''
-        recebe um numero do 1 a 9, a função verificará se trata de um numero dentro dos paramentros do jogo
-        e realizará a efetivação da jogada na posição selecionada
-        '''        
-        pass
-    
-    def apagarjogada(self, pos): 
-        '''
-        Pega uma posição do tabuleiro e o remove o seu numero
-        tomar cuidado para não apagar uma posição que já é nativa do tabuleiro. Ou seja, pré configurada
-        Qunado isso acontecer retornar uma mensagem de erro
-        '''
-        pass   
 
     def __str__(self):  #representação em string
+
+        '''
+        Faz a representação em string do manual quando chamada.
+        '''
 
         saida = ''
         manual = Tela.getManual
@@ -93,8 +73,6 @@ class Sudoku(Mecanicas, Jogador, Tabuleiro, Tela, loadSave, log):    #recebe as 
 
         return saida
 
-if __name__ == main:
-    pass
 
 '''
 IDEIA: PODE SER CRIADO MODOS DE JOGO DIFERENTES, 'FACIL', 'MEDIO', 'DIFICIL'. A DIFERENCA ENTRE ELES SERÁ QUANTAS

@@ -1,5 +1,5 @@
 import os
-from excecoes import ImpossivelCarregar
+from excecoes import *
 from log import *
 from msvcrt import getch
 from tabuleiro import *
@@ -8,7 +8,8 @@ from loadsave import *
 
 class Interface():
     '''
-    representa o que opera atrás da tela do usuario
+    representa o que opera atrás da tela do usuario. Possui funções que auxiliam a construção da tela para o jogador,
+    além de contruí-la.
     '''
     
     tabelaCaracteres = {chr(x) : x for x in range(256)}
@@ -93,6 +94,16 @@ class Interface():
                 i%=4
 
     def opcaoEscolhida(input):
+        '''
+        Executa as opções do menu principal, assim que o usuário pressiona a tecla Enter para confirmar.
+        Recebe um parâmetro de entrada no caso foi feito para funcionar com o contador i da função telaInicial.
+        Quando i igual a:
+            0 = Inicia-se o jogo, printando o tabuleiro e preparando-o chamando a classe tabuleiro.
+            1 = carrega o tabuleiro que estava antes do jogo fechar ou o jogador decidir sair da partida.
+            2 = Carrega as estatísticas, mostra as opções de estatística que delas plotam gráficos correspondentes
+            as opções.
+            3 = Mostra na tela o manual do jogo.
+        '''
 
         if input == 0:
             
@@ -103,7 +114,9 @@ class Interface():
 
         elif input == 1:
             #Vai abrir o arquivo de carregar, preciso fazer as exceções para o caso de abrir errado e etc.
+
             try:
+
                 tabuleiro = open('tabuleiroAtual.txt', 'r')
                 continuar = tabuleiro
                 tabuleiro.close()
@@ -111,8 +124,9 @@ class Interface():
                 return continuar
 
             except FileNotFoundError:
-                
-                raise ImpossivelCarregar
+
+                log.addLog('ImpossivelCarregar')
+                ImpossivelCarregar()
            
 
         elif input == 2:
@@ -126,21 +140,36 @@ class Interface():
 
                 a = Estatisticas('historico.txt')
                 por = a.porcentagens()
+                media_erros = a.media('Quantidade de erros')
+                media_tempo = a.media('Tempo')
+                media_dicas = a.media('Quantidade de dicas')
 
                 while True:
 
                     Interface.limparTela()
                     #debugar a função
-                    print(f'Porcentagem de vitórias:\t{por[0]:0.5f}\nPorcentagem de desistências:\t{por[1]}\nPorcentagem de derrotas:\t{por[2]}')
+                    print('==SUAS ESTATÍSTICAS==')
+                    print('\t')
+                    print('Estatísticas gerais:')
+                    print('\t')
+                    print(f'Vitórias---------{por[0]:0.2f}%\nDesistências-----{por[1]:0.2f}%\nDerrotas---------{por[2]:0.2f}%')
+                    print('\t')
+                    print(f'Média de Erros---{media_erros:0.2f}\nMédia de tempo---{media_tempo:0.2f} segundos\nMédia de dicas---{media_dicas:0.2f}')
                     print('\t')
 
                     if k == 1:
+
+                        print('Opções de gráficos:')
+                        print('\t')
                         print('Escolha sua segunda opção:')
                         print('\t')
 
                     else:
-                        print('Quais opções você deseja? Selecione duas')
-                    
+            
+                        print('Opções de gráficos:')
+                        print('\t')
+                        print('Qual gráfico você deseja? Selecione duas.')
+                        print('\t')
 
                     if j == 0:
                         print('>>>Quantidade de jogos')
@@ -162,6 +191,11 @@ class Interface():
                     else:
                         print('Tempo')
                     
+                    if j == 4:
+                        print('>>>Quantidade de dicas')
+                    else:
+                        print('Quantidade de dicas')
+                    
                     c = getch()
 
                     if c == b'\x1b': #se c for a tecla ESC será encerrado o loop
@@ -173,11 +207,11 @@ class Interface():
                     if c == b'\xe0H':   #tecla seta para baixo do teclado
                         j-=1
                         if j == -1:
-                            j = 3
+                            j = 4
 
                     elif c == b'\xe0P': #tecla seta para cima do teclado
                         j+=1
-                        j%=4
+                        j%=5
                     
                     if c == b'\r':  #Se c for a tecla enter
                         opcoes = {
@@ -185,6 +219,7 @@ class Interface():
                             1 :'Resultados das partidas',
                             2 :'Quantidade de erros',
                             3 :'Tempo',
+                            4:'Quantidade de dicas'
                         }
 
                         if k == 0:
@@ -202,6 +237,7 @@ class Interface():
 
                             except FileNotFoundError:
                                 loadSave()
+                                log.addLog('FileNotFoundError')
 
                         k = 1
 
@@ -214,7 +250,8 @@ class Interface():
             except FileNotFoundError:
 
                 print('Não há estatísticas, você ainda não jogou.') #está aparecendo mt rápido tentar time para ficar mais tempo
-                  
+                log.addLog('FileNotFoundError') 
+                
     def getAtributos(self, atributos = atributos):
         return atributos
     
@@ -237,6 +274,7 @@ class Interface():
         manual['getManual']             = Interface.getManual.__doc_
                 
         return manual
+
 #TERMINAR A QUARTA OPÇÃO DE MANUAL
 # menuprincipal, telapause, telacarregar, telasalvar, opções
 #FAZER A GETMETODOS E A GETATRIBUTOS

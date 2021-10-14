@@ -2,6 +2,10 @@ from validSudoku import *
 from log import *
 
 class Tabuleiro:
+    '''
+    A classe tabuleiro foi criada para lidar com coisas relacionadas ao tabuleiro do sudoku.
+    Preencher tabuleiro, preparar para jogar e etc.
+    '''
 
     def __init__(self, tabuleiro = None): #receberá o formato do tabuleiro e os números permitidos nele 
         

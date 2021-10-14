@@ -13,7 +13,15 @@ class log():
 
             self.arqlog = open(arqlog, 'r')
             self.arqlog.close()
-    
+
+    def addLog(erro):
+        '''
+        Essa função adiciona ao log.txt o erro que ocorreu executando o código.
+        '''
+        log = open('log.txt', 'a')
+        log.write(f'{str(erro)}\n')
+        log.close
+        
 #Erros que podem ter dentro do Sudoku
 #Entrada de teclas erradas dentro do jogo; uma entrada que não seja de 1 a 9
 #Tentar remover um número que seja do tabuleiro base do jogo

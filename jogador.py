@@ -16,6 +16,7 @@ class Jogador():
         -1 = o último elemento se ele resolveu, errou a resolução ou desistiu da partida.
         -2 = o penúltimo o tempo que ele demorou para fechar ou desistir.
         -3 = o antipenultimo a quantidade de erros que ele teve quando fechou o tabuleiro
+        -4 = o número de dicas usadas.
         [0:-3] = e entre todos esses o histórico de jogadas.
         '''
         if nome == '':
