@@ -1,5 +1,6 @@
 from validSudoku import *
 from log import *
+import numpy as np
 
 class Tabuleiro:
     '''
@@ -11,16 +12,32 @@ class Tabuleiro:
         
         if tabuleiro == None:
 
-            self.tabuleiro = getSudoku()
+            tabuleiro = getSudoku()
+            self.tabuleiro = np.array(tabuleiro)
+            print(self.tabuleiro)
             print_board(self.tabuleiro)
 
         
-    def preparar(self, tabuleiro):  #irá apagar os numeros de forma que seja possivel resolver o tabuleiro
+    def preparar(self):  #irá apagar os numeros de forma que seja possivel resolver o tabuleiro
         '''
         A função foi criada para preparar um tabuleiro de sudoku colocando 0 em partes aleatórias do tabuleiro
         com uma certa quantidade para que seja possível a resolução do puzzle.
         '''
-        pass
+        tabuleiro = self.tabuleiro
+        print(tabuleiro)
+        i = 0
+
+        while i < 30:
+
+            linha = random.randrange(1,9)
+            coluna = random.randrange(1,9)
+
+            if tabuleiro[linha][coluna] != 0:
+
+                tabuleiro[linha][coluna] = 0
+                i += 1
+        
+        return tabuleiro
 
     def terminou(self, tabuleiro):
         '''
@@ -47,6 +64,8 @@ class Tabuleiro:
             return False
 
 
-t1 = Tabuleiro
+t1 = Tabuleiro()
+tp = Tabuleiro.preparar(t1)
+print_board(tp)
 
 #FAZER A GETMETODOS E A GETATRIBUTOS
