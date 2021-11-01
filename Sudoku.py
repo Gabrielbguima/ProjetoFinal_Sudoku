@@ -22,7 +22,6 @@ __status__ = 'Production'
 from validSudoku import *
 from tela import *
 from tabuleiro import *
-from jogador import *
 from mecanicas import *
 from loadsave import *
 from log import *
@@ -31,29 +30,17 @@ class Sudoku(Mecanicas):
     '''
     Classe principal que possui atributos como a quantidade de jogadores que jogam e qunado o jogador está jogando.
     '''
+    metodos = {'main', '__str__', 'getAtributos', 'getMetodos', 'getManual'}
+    atributos = {'self'}
 
-    def __init__(self, jogador = 1): 
-        
-        nome = Jogador()
-        self.jogador = nome
-
-    def solucao(self, tabuleiro):
+    def main(self):
         '''
-            Se a opção for desistir será exibido a solução do problema,
-            talvez seja necessário mover essa opção posteriormente
+        função que roda o jogo assim que executam o arquivo Sudoku.py
         '''
-        solucao = solve(tabuleiro)
-        print_board(solucao)
 
-        return True
-
-    def jogando(self):
-        '''
-        funcão que deixa o jogo funcionando em loop, reagindo a cada input do jogador seja de setas, numeros,
-        backspace e etc.
-        '''
-        pass
-
+        if __name__=='__main__':
+            c = Tela()
+            c.visual()
 
     def __str__(self):  #representação em string
 
@@ -73,10 +60,27 @@ class Sudoku(Mecanicas):
 
         return saida
 
+    def getAtributos(atributos):
+        return atributos
+        
+    def getMetodos(metodos):
+        return metodos
 
-'''
-IDEIA: PODE SER CRIADO MODOS DE JOGO DIFERENTES, 'FACIL', 'MEDIO', 'DIFICIL'. A DIFERENCA ENTRE ELES SERÁ QUANTAS
-VEZES O JOGADOR PODE ERRAR; INFINITO/ 10/ 3.
-'''
+    def getManual(self):
+        """
+            Esta função estática (chamada sempre através de Tela.getManual()) retorna um 
+            dicionário que mapeia os nomes dos atributos e métodos às suas descrições.
+            
+            (None) -> dict
+        """
+        manual = {}
+        manual['main']                  = Sudoku.main.__doc__
+        manual['__str__']               = Sudoku.__str__.__doc__
+        manual['getAtributos']          = Sudoku.getAtributos.__doc__
+        manual['getMetodos']            = Sudoku.getMetodos.__doc__
+        manual['getManual']             = Sudoku.getManual.__doc_
+                
+        return manual
 
-#tenho que fazer a getMetodos e getAtributos
+s = Sudoku()
+s.main()
