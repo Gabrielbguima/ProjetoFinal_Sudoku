@@ -26,15 +26,7 @@ class Tela(Interface):
         '''
 
         Tela.telaInicial()
-            
-        '''
-            Quando for pressionado enter deve-se checar a numeração de i
-            colocar os valores em array talvez? dar uma olhada mais tarde
-            Ver a posição do gatilho no código por exemplo i == 0
-            deve iniciar um novo jogo ou seja criar um sudoku dando gatilho em
-            toda a cadeia que desenha o puzzle. Onde a parte de ativação deve ficar?
-            Na classe sudoku e eu chamo a função tela para desenhar o menu de lá?
-        '''
+        
 
     def getAtributos(self, atributos = atributos):
         return atributos
@@ -62,17 +54,3 @@ class Tela(Interface):
         manual['getManual']             = Tela.getManual.__doc_
                 
         return manual
-        
-c = Tela()
-c.visual()
-
-'''
-2. Crie dois atributos privados do tipo conjunto (set), que conterão os nomes dos atributos e dos métodos na classe de cada seção.
-
-	3. Defina os métodos getAtributos() e getMetodos() que retornarão os respectivos conjuntos de nomes.
-
-	4. Preencha o método mágico __str__, a ser acessado quando for dado um "print" de uma instância do seu jogo, que retornará uma string, convenientemente formatada, exibindo os atributos e os métodos com suas respectivas descrições.
-'''
-#Estatisticas caso acessado sem partidas anteriores deve devolver uma mensagem dizendo que não há partidas anteriores
-
-#getch() para ENTER b'\r'

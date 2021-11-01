@@ -30,6 +30,8 @@ class Estatisticas():
         Para cada numero do final da lista ela separa e adiciona a uma lista correspondente.
         O final do algoritmo transforma as listas em array. Para serem usados na função.
     '''
+    metodos = {'__init__', 'grafico','media', 'porcentagens','getMetodos', 'getAtributos', 'getManual'}
+    atributos = {'arquivo'}
     def __init__(self, arquivo):
 
         arq = open(arquivo, 'r')
@@ -39,7 +41,7 @@ class Estatisticas():
 
         for i in range(0, len(leitura)):
             aux = leitura[i].split(' ')
-            leia.append(aux[1:])
+            leia.append(aux)
 
         tamanho = len(leia)
         resultado, tempo, qnt_erro, qnt_dicas = [],[],[],[]
@@ -99,14 +101,17 @@ class Estatisticas():
             fig, ax = plt.subplots()
 
             if eixo_x == 'Tempo':
+                ax.set_title(f'Gráfico de {eixo_x} x {eixo_y}')
                 plt.xlabel(f'{str(eixo_x)}[s]')
                 plt.ylabel(str(eixo_y))
 
             elif eixo_y == 'Tempo':
+                ax.set_title(f'Gráfico de {eixo_x} x {eixo_y}')
                 plt.ylabel(f'{str(eixo_y)}[s]')
                 plt.ylabel(str(eixo_y))
 
             else:
+                ax.set_title(f'Gráfico de {eixo_x} x {eixo_y}')
                 plt.xlabel(str(eixo_x))
                 plt.ylabel(str(eixo_y))
 
@@ -203,7 +208,7 @@ class Estatisticas():
                 ax.plot(partidas2, desistencias, 'yo', label = 'Desistências')  
                 ax.plot(partidas3, derrotas, 'ro', label = 'Derrotas')
                 
-                plt.legend('Vitórias', 'Desistências', 'Derrotas', loc='best')
+                plt.legend(['Vitórias', 'Desistências', 'Derrotas'], loc='best')
 
             else:
 
@@ -281,11 +286,32 @@ class Estatisticas():
 
         return porcentagem_de_wins, porcentagem_de_desistencias, porcentagem_de_derrotas
 
-
-
+    def getAtributos(self, atributos = atributos):
+        return atributos
+    
+    def getMetodos(self, metodos = metodos):
+        return metodos
+    
+    def getManual(self):
+        """
+            Esta função estática (chamada sempre através de Tela.getManual()) retorna um 
+            dicionário que mapeia os nomes dos atributos e métodos às suas descrições.
             
+            (None) -> dict
+        """
+        manual = {}
+        manual['__init__']                 = Estatisticas.__init__.__doc__
+        manual['grafico']                  = Estatisticas.grafico.__doc__
+        manual['jogada']                = Estatisticas.media.__doc__
+        manual['porcentagens']          = Estatisticas.porcentagens.__doc__
+        manual['getAtributos']          = Estatisticas.getAtributos.__doc__
+        manual['getMetodos']            = Estatisticas.getMetodos.__doc__
+        manual['getManual']             = Estatisticas.getManual.__doc_
+                
+        return manual
 
-#e1 = Estatisticas()
+
+#e1 = Estatisticas('historico.txt')
 #e1.grafico('Quantidade de jogos', 'Resultados das partidas')
 
 #TUDO FUNCIONANDO, VER MAIS TARDE SE PODE ADICIONAR COISAS COMO SOMENTE VITÓRIAS, DERROTAS E DESISTENCIAS, ETC

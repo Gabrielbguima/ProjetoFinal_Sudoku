@@ -1,6 +1,4 @@
-#Essa classe tem como função armazenar os dados referentes ao hitórico de jogadas do jogador, tempo,
-# quantidade de erros e acertos, podendo salvar para montar estatísticas e salvar o progresso
-from jogador import *
+from tabuleiro import Tabuleiro
 from validSudoku import *
 from log import *
 
@@ -9,18 +7,27 @@ class loadSave():
     Essa classe tem como o objetivo criar um arquivo .txt que armazena jogadas, nome do jogador, erros,
     se ganhou, perdeu ou desistiu. Além de recarregar o arquivo caso necessário.
     '''
+    metodos = {'__init__','salvarJogada','salvarTabuleiro','salvarResolucao', 'getAtributos', 'getMetodos', 'getManual'}
+    atributos = {'arquivo'}
+
     def __init__(self, arquivo = None):
 
         if arquivo == None:
 
             self.arquivo = open('historico.txt', 'w')
-            self.arquivo.write(self.nome)
             self.arquivo.close()
         
         else:
 
-            self.arquivo = open(arquivo, 'r')
-            self.arquivo.close()
+            try:
+                self.arquivo = open(arquivo, 'r')
+                self.arquivo.close()
+
+            except FileNotFoundError:
+
+                log.addLog('FileNotFoundError')
+                self.arquivo = open('historico.txt', 'w')
+                self.arquivo.close()
     
     def salvarJogada(self, jogada, arquivo = 'historico.txt'):
         '''
@@ -35,7 +42,7 @@ class loadSave():
         try:
 
             adicionar = open(arquivo, 'a')
-            adicionar.write(jogada)
+            adicionar.write(jogada + ' ')
             adicionar.close()
 
         except FileNotFoundError:
@@ -57,18 +64,51 @@ class loadSave():
         '''
         try:
             tabuleiro_atual = open('tabuleiroAtual.txt', 'w')
-            arquivo = open(board, 'r')
 
-            for i in arquivo:
-                tabuleiro_atual.write(i)
+            for i in range(len(board)):
+                
+                tabuleiro_atual.write(f'{str(board[i])}\n')
 
             tabuleiro_atual.close()
-            arquivo.close()
 
         except FileNotFoundError:
-            print('O arquivo não foi encontrado')
             log.addLog('FileNotFoundError')
 
+            tabuleiro_atual = open('tabuleiroAtual.txt', 'w')
+
+            for i in range(len(board)):
+                
+                tabuleiro_atual.write(f'{str(board[i])}\n')
+
+            tabuleiro_atual.close()
+
+    def salvarResolucao(self, board):
+        '''
+        Essa função tem o objetivo de salvar a resolução do tabuleiro que foi colocado para ser jogado
+        ele vai ser sobreescrito toda vez que tiver um novo jogo. Feito para rodar a parte do continuar com 
+        todas as funções do Novo Jogo.
+        '''
+        try:
+
+            tabuleiro_atual = open('tabuleiroResolvido.txt', 'w')
+
+            for i in range(len(board)):
+                
+                tabuleiro_atual.write(f'{str(board[i])}\n')
+
+            tabuleiro_atual.close()
+
+        except FileNotFoundError:
+
+            log.addLog('FileNotFoundError')
+            tabuleiro_atual = open('tabuleiroResolvido.txt', 'w')
+
+            for i in range(len(board)):
+                
+                tabuleiro_atual.write(f'{str(board[i])}\n')
+
+            tabuleiro_atual.close()
+            
     def novoJogo(self, arquivo):
         '''
         Para cada novo jogo iniciado ele adiciona uma nova linha no arquivo que representa um novo jogo.
@@ -91,5 +131,29 @@ class loadSave():
             print('Essa função só funciona com arquivo já criado, necessita jogar a primeira vez')
             log.addLog('FileNotFoundError')
 
-
+    def getAtributos(self, atributos = atributos):
+        return atributos
+    
+    def getMetodos(self, metodos = metodos):
+        return metodos
+    
+    def getManual(self):
+        """
+            Esta função estática (chamada sempre através de Tela.getManual()) retorna um 
+            dicionário que mapeia os nomes dos atributos e métodos às suas descrições.
+            
+            (None) -> dict
+        metodos = {'__init__','salvarJogada','salvarTabuleiro','salvarResolucao', 'getAtributos', 'getMetodos', 'getManual'}
+        atributos = {'arquivo'}
+        """
+        manual = {}
+        manual['__init__']              = loadSave.__init__.__doc__
+        manual['salvarJogada']          = loadSave.salvarJogada.__doc__
+        manual['salvarTabuleiro']       = loadSave.salvarTabuleiro.__doc__
+        manual['salvarResolucao']       = loadSave.salvarResolucao.__doc__
+        manual['getAtributos']          = loadSave.getAtributos.__doc__
+        manual['getMetodos']            = loadSave.getMetodos.__doc__
+        manual['getManual']             = loadSave.getManual.__doc_
+                
+        return manual
 #FAZER A GETMETODOS E A GETATRIBUTOS
